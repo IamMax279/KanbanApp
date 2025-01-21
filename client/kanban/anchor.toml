@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'maksssiula-fdccc8'
+
+[service]
+apid = 'kanban'
+category = 'javascript'
+cert-style = 'acme'
