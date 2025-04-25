@@ -1,7 +1,0 @@
-.statusBox {
-    transition: all 0.1s ease-in-out;
-}
-
-.statusBox:hover {
-    background-color: #2e2e2e;
-}

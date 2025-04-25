@@ -1,10 +1,10 @@
 "use client"
 import { useState } from "react"
-import styles from "../styles/login.module.css"
+import styles from "../../styles/login.module.css"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { LoginService } from "../services/loginService"
+import { LoginService } from "@/services/loginService"
 
 export default function Login() {
     const [email, setEmail] = useState<string>("")

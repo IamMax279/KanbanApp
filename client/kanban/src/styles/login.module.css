@@ -1,0 +1,72 @@
+.loginContainer {
+    /* height: 22.75rem; */
+    background-color: var(--background);
+}
+
+.signupContainer {
+    /* height: 34rem; */
+    background-color: var(--background);
+}
+
+.loginText {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.loginP {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.uniqueErrorText {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--textWarning);
+}
+
+.partialTitle {
+    font-family: "Geo", sans-serif;
+    font-style: italic;
+    font-size: 3rem;
+    transition: all 0.15s ease-in-out;
+}
+.partialTitle:hover {
+    filter: brightness(0.7);
+    scale: calc(0.95)
+}
+
+.loginLabel {
+    font-family: "Inter", sans-serif;
+    color: var(--foreground);
+}
+
+.loginInput {
+    font-family: "Inter", sans-serif;
+    background-color: var(--componentBackground);
+}
+
+.newKanbanInput {
+    font-family: "Inter", sans-serif;
+    color: var(--foreground);
+}
+
+.loginButton {
+    font-family: "Inter", sans-serif;
+    background-color: var(--componentBackground);
+    color: black;
+    font-weight: 500;
+    padding: 0.45rem 0;
+}
+.loginButton:hover {
+    filter: brightness(0.9);
+}
+
+@media (max-width: 1200px) {
+    .loginP {
+        font-size: 0.9rem;
+    }
+}

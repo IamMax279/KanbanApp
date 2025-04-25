@@ -7,8 +7,8 @@ import { Progress } from "@nextui-org/progress";
 import { Button } from "@nextui-org/button";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/modal";
 
-import styles from "../styles/wholekanban.module.css"
-import { AddKanbanService } from '../services/addkanbanService';
+import styles from "../../styles/wholekanban.module.css"
+import { AddKanbanService } from '@/services/addkanbanService';
 
 export default function WholeKanban() {
     const [checked, setChecked] = useState<boolean>(false)

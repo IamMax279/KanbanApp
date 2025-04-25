@@ -2,7 +2,7 @@ import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 
-import { PaymentsService } from "@/app/services/paymentsService";
+import { PaymentsService } from "@/services/paymentsService";
 import Loading from "./Loading";
 
 const PaymentForm = () => {

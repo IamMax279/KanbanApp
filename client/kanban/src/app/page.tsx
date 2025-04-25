@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import KanbanCard from "@/components/ui/KanbanCard";
-import { AddKanbanService, Kanban } from "./services/addkanbanService";
+import { AddKanbanService, Kanban } from "@/services/addkanbanService";
 
 export default function Home() {
   const [kanbans, setKanbans] = useState<Kanban[]>([])

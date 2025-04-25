@@ -5,7 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross1 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 
-import styles from "../../app/styles/home.module.css";
+import styles from "../../styles/home.module.css";
 
 interface NavBarProps {
     firstName: string

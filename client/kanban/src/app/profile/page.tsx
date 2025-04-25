@@ -3,9 +3,9 @@ import { useEffect, useState } from "react"
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 
-import { UserData, ProfileService } from "../services/profileService"
-import styles from "../styles/profile.module.css"
-import { AuthService } from "../services/authService";
+import { UserData, ProfileService } from "../../services/profileService"
+import styles from "../../styles/profile.module.css"
+import { AuthService } from "../../services/authService";
 
 export default function Profile() {
     const [userData, setUserData] = useState<UserData | undefined>(undefined)

@@ -3,8 +3,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import styles from "../styles/login.module.css"
-import { SignupService } from "../services/signupService"
+import styles from "../../styles/login.module.css"
+import { SignupService } from "@/services/signupService"
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("")
