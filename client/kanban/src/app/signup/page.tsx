@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styles from "../../styles/login.module.css"
 import { SignupService } from "@/services/signupService"
 
@@ -11,6 +11,7 @@ export default function SignUp() {
     const [secondName, setSecondName] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [secure, setSecure] = useState<boolean>(true)
     const [uniqueViolation, setUniqueViolation] = useState<boolean>(false)
     const [emptyField, setEmptyField] = useState<boolean>(false)
 
@@ -91,17 +92,30 @@ export default function SignUp() {
                         className={`${styles.loginInput} outline-none text-black px-1 h-10 rounded-md
                         shadow-black shadow-inner`}/>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col relative">
                         <div className="flex justify-between w-full mb-1">
                             <label className={`${styles.loginLabel} font-semibold text-base`}>
                                 Password
                             </label>
                         </div>
-                        <input type="password"
+                        <input type={`${secure ? 'password' : 'text'}`}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className={`${styles.loginInput} outline-none text-black px-1 h-10 rounded-md
                         shadow-black shadow-inner`}/>
+                        {secure ?
+                        <FaRegEye
+                        size={20}
+                        className="absolute text-black right-[5px] top-[38px] cursor-pointer"
+                        onClick={() => setSecure(prev => !prev)}
+                        />
+                        :
+                        <FaRegEyeSlash
+                        size={20}
+                        className="absolute text-black right-[5px] top-[38px] cursor-pointer"
+                        onClick={() => setSecure(prev => !prev)}
+                        />
+                        }
                     </div>
                 </div>
                 <div className="mt-8 mb-2">
