@@ -42,9 +42,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(UserDto userDto) {
-        User user = mapToUser(userDto);
-        userRepository.save(user);
+    public String addUser(UserDto userDto) throws Exception {
+        try {
+            User user = mapToUser(userDto);
+            userRepository.save(user);
+
+            return "success";
+        } catch (Exception e) {
+            return "failed to add user";
+        }
     }
 
     @Override

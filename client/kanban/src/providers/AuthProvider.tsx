@@ -65,7 +65,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode})
         validateToken()
     }, [router, pathname])
 
-    if(loading) return <Loading placementOption="justify-center"/>
+    if(loading) return <Loading/>
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, userData }}>

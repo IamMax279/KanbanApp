@@ -6,12 +6,14 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { LoginService } from "@/services/loginService"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Loading from "@/components/Loading"
 
 export default function Login() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [secure, setSecure] = useState<boolean>(true)
     const [loginError, setLoginError] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const router = useRouter()
 
@@ -19,6 +21,7 @@ export default function Login() {
 
     const onLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         try {
+            setLoading(true)
             e.preventDefault()
 
             const response = await service.handleLogin({
@@ -37,7 +40,13 @@ export default function Login() {
             }
         } catch(error) {
             console.log("error in login", error)
+        } finally {
+            setLoading(false)
         }
+    }
+
+    if(loading) {
+        return <Loading/>
     }
 
     return(

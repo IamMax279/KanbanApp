@@ -2,11 +2,9 @@ package controllers;
 
 
 import dto.UserDto;
-import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import services.UserService;
 import utils.JwtWrapper;
@@ -40,12 +38,17 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public ResponseEntity<String> addUser(@RequestBody UserDto user) {
+    public ResponseEntity<String> addUser(@RequestBody UserDto user) throws Exception {
         try {
             if(user.getFirstName().isEmpty() || user.getSecondName().isEmpty() || user.getEmail().isEmpty() || user.getPassword().isEmpty()) {
                 return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
             }
-            userService.addUser(user);
+            String result = userService.addUser(user);
+
+            if(result.equals("failed to add user")) {
+                throw new Exception(result);
+            }
+
             return new ResponseEntity<>("User added", HttpStatus.OK);
         } catch(Error e) {
             return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);

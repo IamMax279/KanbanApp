@@ -53,9 +53,7 @@ const PaymentForm = () => {
     };
 
     if (loading && !clientSecret) return (
-    <div className="mt-12">
-        <Loading placementOption="justify-start"/>
-    </div>
+        <Loading/>
     )
 
     return (

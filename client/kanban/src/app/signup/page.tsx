@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styles from "../../styles/login.module.css"
 import { SignupService } from "@/services/signupService"
+import Loading from "@/components/Loading";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("")
@@ -14,13 +15,18 @@ export default function SignUp() {
     const [secure, setSecure] = useState<boolean>(true)
     const [uniqueViolation, setUniqueViolation] = useState<boolean>(false)
     const [emptyField, setEmptyField] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const router = useRouter()
 
     const service = new SignupService()
 
     const onSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        setUniqueViolation(false)
+        setEmptyField(false)
+        
         try {
+            setLoading(true)
             e.preventDefault()
 
             const response = await service.handleSignup({
@@ -41,9 +47,6 @@ export default function SignUp() {
                     break
             }
 
-            setUniqueViolation(false)
-            setEmptyField(false)
-
             if(response.success) {
                 console.log(response.data)
                 router.replace("/login")
@@ -51,6 +54,13 @@ export default function SignUp() {
         } catch(error) {
             console.log("error in signup client", error)
         }
+        finally {
+            setLoading(false)
+        }
+    }
+
+    if(loading) {
+        return <Loading/>
     }
 
     return(
@@ -135,7 +145,7 @@ export default function SignUp() {
                 {emptyField &&
                 <div className="flex flex-row justify-center mt-4 -mb-2">
                     <p className={`${styles.uniqueErrorText} self-center`}>
-                        Fill in all fields.
+                        All fields must be filled.
                     </p>
                 </div>
                 }

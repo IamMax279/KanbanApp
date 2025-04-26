@@ -135,11 +135,6 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="flex flex-row self-center mt-4">
-                        <Button color="success" variant='solid'
-                        className='text-gray-100 font-semibold mr-2'
-                        onPress={() => router.replace("/payments")}>
-                            Upgrade account
-                        </Button>
                         <Button color="primary" variant='solid'
                         className='text-gray-100 font-semibold'
                         onPress={() => handleLogout()}>
