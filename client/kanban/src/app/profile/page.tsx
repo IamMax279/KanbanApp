@@ -134,11 +134,16 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row self-center mt-4">
+                    <div className="flex flex-col items-center justify-center space-y-4">
                         <Button color="primary" variant='solid'
                         className='text-gray-100 font-semibold'
                         onPress={() => handleLogout()}>
                             Log out
+                        </Button>
+                        <Button color="danger" variant='flat'
+                        className='text-gray-100 font-semibold'
+                        onPress={() => router.push('/delete-account')}>
+                           Delete account
                         </Button>
                     </div>
                 </div>
