@@ -64,12 +64,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteByEmail(String email) {
+    public void deleteByEmail(String email) throws IllegalArgumentException {
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isPresent()) {
             userRepository.delete(user.get());
         } else {
             throw new IllegalArgumentException("User not found");
+        }
+    }
+
+    @Override
+    public void deleteByPassword(String password, String token) throws Exception  {
+        try {
+            String email = jwtService.extractEmail(token);
+            if(email.trim().isEmpty()) {
+                throw new Exception("No email/token provided.");
+            }
+
+            Optional<User> user = userRepository.findByEmail(email);
+            if(user.isEmpty())  {
+                throw new Exception("No user found.");
+            }
+            if(!encoder.matches(password, user.get().getPassword())) {
+                throw new Exception("Passwords don't match.");
+            }
+
+            this.deleteByEmail(email);
+        } catch(Exception e) {
+            throw new Exception("Failed to delete user: " + e.getMessage(), e);
         }
     }
 
