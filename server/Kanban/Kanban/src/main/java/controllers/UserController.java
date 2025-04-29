@@ -73,13 +73,14 @@ public class UserController {
     }
 
     @PostMapping("/delete-user")
-    public ResponseEntity<String> deleteUser(@RequestHeader("Authorization") String auth, @RequestBody String password) {
+    public ResponseEntity<String> deleteUser(@RequestHeader("Authorization") String auth, @RequestBody Map<String, String> body) {
         try {
             if(auth.trim().isEmpty()) {
                 return new ResponseEntity<>("Missing authorization", HttpStatus.FORBIDDEN);
             }
 
-            userService.deleteByPassword(password, auth);
+            String token = auth.substring(7);
+            userService.deleteByPassword(body.get("password"), token);
             return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<>("Something went wrong: " + e.getMessage(), HttpStatus.BAD_REQUEST);
