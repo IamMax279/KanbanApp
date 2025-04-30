@@ -89,8 +89,14 @@ public class UserServiceImpl implements UserService {
                 throw new Exception("Passwords don't match.");
             }
 
+            if(user.get().getKanbans() != null) {
+                user.get().getKanbans().clear();
+            }
+            if(user.get().getKanbanDates() != null) {
+                user.get().getKanbanDates().clear();
+            }
+
             kanbanRepository.deleteByUser(user.get());
-            //TODO: usunac najpierw wszystkie kanbany tego usera
 
             this.deleteByEmail(email);
         } catch(Exception e) {

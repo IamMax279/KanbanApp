@@ -73,17 +73,24 @@ public class UserController {
     }
 
     @PostMapping("/delete-user")
-    public ResponseEntity<String> deleteUser(@RequestHeader("Authorization") String auth, @RequestBody Map<String, String> body) {
+    public ResponseEntity<Map<String, String>> deleteUser(@RequestHeader("Authorization") String auth, @RequestBody Map<String, String> body) {
         try {
             if(auth.trim().isEmpty()) {
-                return new ResponseEntity<>("Missing authorization", HttpStatus.FORBIDDEN);
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Missing authorization.");
+                return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
             }
 
             String token = auth.substring(7);
             userService.deleteByPassword(body.get("password"), token);
-            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "User deleted successfully");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch(Exception e) {
-            return new ResponseEntity<>("Something went wrong: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Something went wrong: " + e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 }
