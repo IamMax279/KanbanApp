@@ -28,9 +28,6 @@ interface AddKanbanResponse {
 }
 
 export class AddKanbanService {
-    private readonly addKanbanUrl = process.env.NEXT_PUBLIC_API_URL + "/addkanban"
-    private readonly fetchKanbansUrl = process.env.NEXT_PUBLIC_API_URL + "/getmykanbans"
-    private readonly deleteKanbanUrl = process.env.NEXT_PUBLIC_API_URL + "/deletekanban"
     private readonly updateKanbanStatusUrl = process.env.NEXT_PUBLIC_API_URL + "/updatekanbanstatus"
 
     async addNewKanban(params: KanbanParams): Promise<AddKanbanResponse> {
@@ -49,9 +46,8 @@ export class AddKanbanService {
                 userId: payload.userId
             }
 
-            await axios.post(this.addKanbanUrl, data, {
+            await axios.post("api/kanban/add-kanban", data, {
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })
@@ -82,9 +78,8 @@ export class AddKanbanService {
                 throw new Error("Token not found")
             }
 
-            const kanbans = await axios.get(this.fetchKanbansUrl, {
+            const kanbans = await axios.get("api/kanban/get-kanbans", {
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })
@@ -134,9 +129,8 @@ export class AddKanbanService {
         }
 
         try {
-            await axios.delete(`${this.deleteKanbanUrl}?id=${id}`, {
+            await axios.delete(`api/kanban/delete-kanban?id=${id}`, {
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })
