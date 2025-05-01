@@ -28,8 +28,6 @@ interface AddKanbanResponse {
 }
 
 export class AddKanbanService {
-    private readonly updateKanbanStatusUrl = process.env.NEXT_PUBLIC_API_URL + "/updatekanbanstatus"
-
     async addNewKanban(params: KanbanParams): Promise<AddKanbanResponse> {
         try {
             const token = await AuthService.getToken()
@@ -105,13 +103,12 @@ export class AddKanbanService {
         const userId = payload.userId
 
         try {
-            await axios.put(this.updateKanbanStatusUrl, {
+            await axios.put("api/kanban/update-kanban-status", {
                 id,
                 status,
                 userId
             }, {
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })
