@@ -17,7 +17,6 @@ interface UserDataResult {
 }
 
 export class ProfileService {
-    private readonly userDataUrl = process.env.NEXT_PUBLIC_API_URL + "/getuserdata"
     async fetchUserData(): Promise<UserDataResult> {
         try {
             const token = await AuthService.getToken()
@@ -31,9 +30,8 @@ export class ProfileService {
             const payload = JSON.parse(atob(token.split(".")[1]))
             const email = payload.sub
 
-            const data = await axios.get(`${this.userDataUrl}?email=${email}`, {
+            const data = await axios.get(`api/user/get-user-data?email=${email}`, {
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })

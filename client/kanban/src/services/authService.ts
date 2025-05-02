@@ -10,11 +10,8 @@ export class AuthService {
         if(!token) {
             const refreshToken = this.getRefreshToken()
             if(refreshToken) {
-                const newTokenUrl = process.env.NEXT_PUBLIC_API_URL + `/getaccesstoken?refreshToken=${refreshToken}`
-
-                const response = await axios.get(newTokenUrl, {
+                const response = await axios.get(`api/auth/get-access-token?refreshToken=${refreshToken}`, {
                     headers: {
-                        "Content-Type": "application/json",
                         "Authorization": `Bearer ${refreshToken}`
                     }
                 })

@@ -15,19 +15,13 @@ interface SignupResponse {
 }
 
 export class SignupService {
-    private readonly signupUrl = process.env.NEXT_PUBLIC_API_URL + "/adduser"
-
     async handleSignup(params: RegisterData): Promise<SignupResponse> {
         try {
-            const response = await axios.post(this.signupUrl, {
+            const response = await axios.post("api/user/add-user", {
                 firstName: params.firstName,
                 secondName: params.secondName,
                 email: params.email,
                 password: params.password
-            }, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
             })
 
             return {

@@ -16,18 +16,12 @@ interface LoginResult {
     errStatus?: number
 }
 
-export class LoginService {
-    private readonly loginUrl = process.env.NEXT_PUBLIC_API_URL + "/login"
-    
+export class LoginService {    
     async handleLogin(params: LoginParams): Promise<LoginResult> {
         try {
-            const response = await axios.post(this.loginUrl, {
+            const response = await axios.post("api/user/login", {
                 email: params.email,
                 password: params.password
-            }, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
             })
             
             const token = response.data.token
