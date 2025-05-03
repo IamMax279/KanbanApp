@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
         const data = await response.json()
         return NextResponse.json(data, { status: response.status })
     } catch(error) {
+        console.log("JEBANNY:", error)
         return NextResponse.json({ message: "Server error" }, { status: 500 })
     }
 }

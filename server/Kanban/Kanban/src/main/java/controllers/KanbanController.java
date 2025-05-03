@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import services.KanbanService;
 import services.JWTService;
 
+import java.util.Map;
+
 @RestController
 public class KanbanController {
     @Autowired
@@ -15,17 +17,17 @@ public class KanbanController {
     private JWTService jwtService;
 
     @PostMapping("/addkanban")
-    public ResponseEntity<String> addKanban(@RequestBody KanbanDto kanbanDto, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<Map<String, String>> addKanban(@RequestBody KanbanDto kanbanDto, @RequestHeader("Authorization") String token) {
         if (kanbanDto.getUserId().toString().isEmpty() || kanbanDto.getTitle().isEmpty() || kanbanDto.getLabel().isEmpty() || kanbanDto.getDeadline().isEmpty() || kanbanDto.getStatus().isEmpty()) {
-            return ResponseEntity.status(403).body("Missing data");
+            return ResponseEntity.status(403).body(Map.of("message", "Missing data"));
         }
 
         if (token == null || !jwtService.validateToken(token.substring(7))) {
-            return ResponseEntity.status(401).body("Unauthorized");
+            return ResponseEntity.status(401).body(Map.of("message", "Unauthorized"));
         }
 
         kanbanService.addKanban(kanbanDto);
-        return ResponseEntity.ok("Kanban added successfully");
+        return ResponseEntity.ok(Map.of("message", "Kanban added successfully"));
     }
     @GetMapping("/getmykanbans")
     public ResponseEntity<?> getMyKanbans(@RequestHeader("Authorization") String token) {
@@ -36,13 +38,13 @@ public class KanbanController {
         return ResponseEntity.ok(kanbanService.findMyKanbans(jwtService.extractUserId(token.substring(7))));
     }
     @DeleteMapping("/deletekanban")
-    public ResponseEntity<String> deleteKanban(@RequestParam Long id) {
+    public ResponseEntity<Map<String, String>> deleteKanban(@RequestParam Long id) {
         kanbanService.deleteKanban(id);
-        return ResponseEntity.ok("Kanban deleted successfully");
+        return ResponseEntity.ok(Map.of("message", "Kanban deleted successfully"));
     }
     @PutMapping("/updatekanbanstatus")
-    public ResponseEntity<String> updateKanbanStatus(@RequestBody KanbanDto kanbanDto) {
+    public ResponseEntity<Map<String, String>> updateKanbanStatus(@RequestBody KanbanDto kanbanDto) {
         kanbanService.updateKanbanStatus(kanbanDto);
-        return ResponseEntity.ok("Kanban status updated successfully");
+        return ResponseEntity.ok(Map.of("message", "Kanban status updated successfully"));
     }
 }

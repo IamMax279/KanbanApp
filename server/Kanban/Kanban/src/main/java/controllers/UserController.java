@@ -38,10 +38,13 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public ResponseEntity<String> addUser(@RequestBody UserDto user) throws Exception {
+    public ResponseEntity<Map<String, String>> addUser(@RequestBody UserDto user) throws Exception {
         try {
+            Map<String, String> response = new HashMap<>();
+
             if(user.getFirstName().isEmpty() || user.getSecondName().isEmpty() || user.getEmail().isEmpty() || user.getPassword().isEmpty()) {
-                return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+                response.put("message", "Missing data");
+                return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
             }
             String result = userService.addUser(user);
 
@@ -49,9 +52,12 @@ public class UserController {
                 throw new Exception(result);
             }
 
-            return new ResponseEntity<>("User added", HttpStatus.OK);
+            response.put("message", "User added");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch(Error e) {
-            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "an error occurred: " + e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 

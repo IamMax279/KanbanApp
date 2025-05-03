@@ -24,7 +24,7 @@ export default function Profile() {
         const fetchData = async () => {
             const result = await profileService.fetchUserData()
             if(result.success) {
-                console.log(result.data)
+                console.log("DATAA:", result.data)
                 setUserData({
                     firstName: result.data!.firstName,
                     secondName: result.data!.secondName,
@@ -59,6 +59,7 @@ export default function Profile() {
     }
 
     useEffect(() => {
+        console.log("USER DATA:", userData)
         if(!userData) return
         const renderCubes = () => {
             const cubes = []
@@ -85,16 +86,22 @@ export default function Profile() {
     }, [userData])
 
     const mapDateToDaysAgo = (dateString: string): number => {
-        const cleanDateString = dateString.replace(' CET', '');
-        const givenDate = new Date(cleanDateString);
+        const cleaned = dateString.replace(' CEST', '').replace(' CET', '');
+    
+        const parsedDate = new Date(cleaned);
+    
+        if (isNaN(parsedDate.getTime())) {
+            console.warn("Invalid date:", dateString);
+            return -1;
+        }
+    
         const today = new Date();
-        
         today.setHours(0, 0, 0, 0);
-        givenDate.setHours(0, 0, 0, 0);
-        
-        const diffTime = today.getTime() - givenDate.getTime();
+        parsedDate.setHours(0, 0, 0, 0);
+    
+        const diffTime = today.getTime() - parsedDate.getTime();
         return Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    }
+    };
 
     const handleLogout = async () => {
         const result = profileService.logOut()

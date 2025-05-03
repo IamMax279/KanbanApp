@@ -13,7 +13,8 @@ export async function PUT(request: NextRequest) {
             {
                 method: 'PUT',
                 headers: {
-                    'Authorization': authHeader
+                    'Authorization': authHeader,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)
             }

@@ -17,6 +17,7 @@ export class AuthService {
                 })
 
                 if(response.data.accessToken) {
+                    localStorage.setItem("jwt", response.data.accessToken)
                     token = response.data.accessToken
                     this.setToken(token!)
                 }

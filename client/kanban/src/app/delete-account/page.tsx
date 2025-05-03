@@ -3,10 +3,60 @@
 import { useState } from "react"
 import styles from "../../styles/login.module.css"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa"
+import Loading from "@/components/Loading"
+import { Button } from "@nextui-org/button";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/modal";
+import axios from "axios"
+import { AuthService } from "@/services/authService"
+import { useRouter } from "next/navigation"
 
 export default function DeleteAccount() {
     const [password, setPassword] = useState<string>("")
     const [secure, setSecure] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
+
+    const router = useRouter()
+
+    const deleteAccount = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        try {
+            setLoading(true)
+            setError(false)
+            e.preventDefault()
+
+            const token = await AuthService.getToken()
+            if(!token) {
+                throw new Error("Missing token.")
+            }
+
+            const response = await axios.post(
+                "api/user/delete-account",
+                {password},
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            )
+            
+            if(response.data.message === 'User deleted successfully') {
+                AuthService.removeToken()
+                AuthService.removeRefreshToken()
+
+                setOpen(true)
+            }
+        } catch(error) {
+            console.log("kewf:", error)
+            setError(true)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if(loading) {
+        return <Loading/>
+    }
 
     return (
         <div className="flex flex-col justify-start items-center min-h-screen">
@@ -47,21 +97,37 @@ export default function DeleteAccount() {
                         }
                     </div>
                 </div>
+                {error &&
+                <div className="flex flex-row justify-center -mb-6 mt-2">
+                    <p className={`${styles.uniqueErrorText}`}>
+                        Something went wrong.
+                    </p>
+                </div>
+                }
                 <div className="mt-8 mb-2">
                     <button className={`${styles.loginButton} flex flex-row w-full
                     justify-center items-center rounded-md`}
-                    onClick={() => {}}>
+                    onClick={(e) => deleteAccount(e)}>
                         Delete
                     </button>
                 </div>
-                {/* {loginError &&
-                <div className="flex flex-row justify-center -mb-2 mt-2">
-                    <p className={`${styles.uniqueErrorText}`}>
-                        Wrong credentials.
-                    </p>
-                </div>
-                } */}
             </form>
+            <Modal isOpen={open}>
+                <ModalContent className='bg-neutral-900'>
+                {(onClose) => (
+                    <>
+                    <ModalHeader className="flex flex-col gap-1 text-center text-gray-100">Your account has been deleted</ModalHeader>
+                    <ModalFooter className='flex flex-row justify-center items-center gap-2'>
+                        <Button color="primary" onPress={() => {
+                            router.replace('/login')
+                        }} className='font-semibold'>
+                        OK
+                        </Button>
+                    </ModalFooter>
+                    </>
+                )}
+                </ModalContent>
+            </Modal>
         </div>
     )
 }
