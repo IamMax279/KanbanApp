@@ -39,7 +39,7 @@ export default function SignUp() {
             console.log(response)
 
             switch(response.errStatus) {
-                case 401:
+                case 500:
                     setUniqueViolation(true)
                     break
                 case 403:

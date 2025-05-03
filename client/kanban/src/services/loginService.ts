@@ -49,7 +49,7 @@ export class LoginService {
                 return {
                     success: false,
                     message: error.message,
-                    errStatus: error.status
+                    errStatus: error.response?.status
                 }
             }
 

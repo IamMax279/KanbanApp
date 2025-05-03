@@ -29,7 +29,7 @@ export default function Login() {
                 password
             })
 
-            if (response.errStatus === 401) {
+            if (response.errStatus === 500) {
                 setLoginError(true)
             }
 
