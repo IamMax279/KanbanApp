@@ -34,7 +34,6 @@ export class AuthService {
             }
             return token
         } catch(error) {
-            console.log(error)
             this.removeToken()
             return null;
         }
@@ -60,7 +59,6 @@ export class AuthService {
             }
             return token
         } catch(e) {
-            console.log(e)
             this.removeRefreshToken()
             return null
         }

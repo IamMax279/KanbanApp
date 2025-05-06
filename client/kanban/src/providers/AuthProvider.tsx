@@ -16,7 +16,6 @@ interface AuthProviderProps {
     }
 }
 
-const getAccessTokenUrl = process.env.NEXT_PUBLIC_API_URL + "/getaccesstoken?refreshToken="
 const EXCLUDED = ['/login', '/signup']
 
 const AuthContext = createContext<AuthProviderProps | undefined>(undefined)
@@ -57,7 +56,6 @@ export default function AuthProvider({ children }: { children: React.ReactNode})
                 setIsAuthenticated(true)
                 setLoading(false)
             } catch(e) {
-                console.log("error validating token", e)
                 setIsAuthenticated(false)
                 setLoading(false)
             }

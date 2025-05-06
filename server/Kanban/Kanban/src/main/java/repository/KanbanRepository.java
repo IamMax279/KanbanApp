@@ -11,6 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface KanbanRepository extends JpaRepository<Kanban, Long> {
     @Transactional
     @Modifying
-    @Query("DELETE FROM Kanban k WHERE k.user = :user") //takes the user param from below
+    @Query("DELETE FROM Kanban k WHERE k.user = :user")
     void deleteByUser(@Param("user") User user);
 }

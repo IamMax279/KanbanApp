@@ -14,7 +14,6 @@ export default function Home() {
     const fetchKanbans = async () => {
       const addKanbanService = new AddKanbanService()
       const kanbans = await addKanbanService.fetchMyKanbans()
-      console.log(kanbans)
       setKanbans(kanbans)
     }
     fetchKanbans()

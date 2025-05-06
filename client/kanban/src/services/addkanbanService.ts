@@ -52,8 +52,6 @@ export class AddKanbanService {
 
             return {success: true}
         } catch(error) {
-            console.log("error in addNewKanban", error)
-
             if(error instanceof AxiosError) {
                 return {
                     success: false,
@@ -82,10 +80,8 @@ export class AddKanbanService {
                 }
             })
 
-            console.log(kanbans.data)
             return kanbans.data
         } catch(error) {
-            console.log("error in fetchMyKanbans", error)
             return [];
         }
     }
@@ -114,7 +110,6 @@ export class AddKanbanService {
             })
             return {success: true}
         } catch(e) {
-            console.log("error in updateKanbanStatus", e)
             return {success: false, message: "Error in updating kanban status"}
         } 
     }
@@ -133,7 +128,6 @@ export class AddKanbanService {
             })
             return {success: true}
         } catch(e) {
-            console.log("error in deleteKanban", e)
             return {success: false, message: "Error in deleting kanban"}
         }
     }

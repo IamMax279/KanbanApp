@@ -156,13 +156,10 @@ public class UserServiceImpl implements UserService {
 
     private User mapToUser(UserDto userDto) {
         return User.builder()
-                //.id(userDto.getId())
                 .firstName(userDto.getFirstName())
                 .secondName(userDto.getSecondName())
                 .email(userDto.getEmail())
                 .password(encoder.encode(userDto.getPassword()))
-                //.createdAt(userDto.getCreatedAt())
-                //.updatedAt(userDto.getUpdatedAt())
                 .build();
     }
 }

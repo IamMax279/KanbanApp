@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { UserData, ProfileService } from "../../services/profileService"
 import styles from "../../styles/profile.module.css"
 import { AuthService } from "../../services/authService";
+import Loading from "@/components/Loading";
 
 export default function Profile() {
     const [userData, setUserData] = useState<UserData | undefined>(undefined)
@@ -24,7 +25,6 @@ export default function Profile() {
         const fetchData = async () => {
             const result = await profileService.fetchUserData()
             if(result.success) {
-                console.log("DATAA:", result.data)
                 setUserData({
                     firstName: result.data!.firstName,
                     secondName: result.data!.secondName,
@@ -33,9 +33,6 @@ export default function Profile() {
                     kanbanDates: result.data!.kanbanDates,
                     resolvedKanbans: result.data!.resolvedKanbans
                 })
-                console.log(mapDateToDaysAgo("Thu Jan 9 21:27:29 2025"))
-            } else {
-                console.log(result.message)
             }
         }
         fetchData()
@@ -59,7 +56,6 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        console.log("USER DATA:", userData)
         if(!userData) return
         const renderCubes = () => {
             const cubes = []
@@ -91,7 +87,6 @@ export default function Profile() {
         const parsedDate = new Date(cleaned);
     
         if (isNaN(parsedDate.getTime())) {
-            console.warn("Invalid date:", dateString);
             return -1;
         }
     
@@ -110,7 +105,7 @@ export default function Profile() {
         }
     }
 
-    if(!userData) return null
+    if(!userData) return <Loading/>
 
     return (
         <div className="flex flex-col p-4">

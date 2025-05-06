@@ -29,7 +29,6 @@ public class StripeController {
         Long amount = Long.valueOf(request.get("amount"))*100;
         params.put("amount", amount);
         params.put("currency", "usd");
-        //params.put("payment_method_types", Arrays.asList("card", "google_pay", "apple_pay"));
         params.put("automatic_payment_methods", Map.of("enabled", true));
 
         try {

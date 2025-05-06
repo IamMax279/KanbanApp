@@ -49,7 +49,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://kanban.lcl.host:44393", "https://kanban.localhost:44393"));
+        configuration.setAllowedOrigins(Arrays.asList("http://client:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList(
                 "Authorization",
@@ -66,12 +66,6 @@ public class SecurityConfig {
     }
     @Bean
     public UserDetailsService userDetailsService() {
-//        UserDetails user1 = User.builder()
-//                .username("maks")
-//                .password("haslo123") // Dodaj prefix {noop} dla plain text hasła
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user1);
         return new UserDetailsServiceImpl();
     }
     @Bean

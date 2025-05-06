@@ -43,8 +43,6 @@ export class LoginService {
                 }
             }
         } catch(error) {
-            console.log("error in login", error)
-
             if (error instanceof AxiosError) {
                 return {
                     success: false,

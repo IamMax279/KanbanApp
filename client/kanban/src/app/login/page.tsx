@@ -35,11 +35,10 @@ export default function Login() {
 
             if(response.success) {
                 setLoginError(false)
-                console.log(response.data)
                 router.replace("/")
             }
         } catch(error) {
-            console.log("error in login", error)
+            setLoginError(true)
         } finally {
             setLoading(false)
         }

@@ -48,7 +48,7 @@ export default function AddKanban() {
                 router.push("/")
             }
         } catch(e) {
-            console.log("error submiting form", e)
+            setAddError(true)
         }
     }
 

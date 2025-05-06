@@ -30,8 +30,6 @@ export class SignupService {
                 data: response
             }
         } catch(error) {
-            console.log("error in signup", error)
-
             if(error instanceof AxiosError) {
                 return {
                     success: false,

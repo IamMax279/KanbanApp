@@ -41,7 +41,6 @@ export class ProfileService {
                 data: data.data
             }
         } catch(error) {
-            console.log("error in fetchUserData", error)
             return {
                 success: false,
                 message: error instanceof Error ? error.message : "An error occurred"

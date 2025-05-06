@@ -29,7 +29,6 @@ public class JWTServiceImpl implements JWTService {
 
     @Value("${jwt.secret.key}")
     private String secretKey;
-    //private static final String secretKey = Base64.getEncoder().encodeToString(Keys.secretKeyFor(SignatureAlgorithm.HS256).getEncoded());
 
     @Override
     public SecretKey getKey() {

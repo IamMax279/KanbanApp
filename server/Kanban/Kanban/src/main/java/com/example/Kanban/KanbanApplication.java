@@ -9,10 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {"com.example.Kanban", "config", "models", "repository", "services"})
 @EntityScan(basePackages = "models")
-@EnableJpaRepositories(basePackages = "repository") //skanuje skanuje interfejsy repozytoriów JPA
-//(oznaczone jako @Repository lub rozszerzające JpaRepository)
-@ComponentScan(basePackages = {"controllers", "services", "repository", "config"}) //odpowiada za skanowanie komponentów, takich jak klasy oznaczone
-// @Service, @Controller, @Component
+@EnableJpaRepositories(basePackages = "repository")
+@ComponentScan(basePackages = {"controllers", "services", "repository", "config"})
 public class KanbanApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KanbanApplication.class, args);

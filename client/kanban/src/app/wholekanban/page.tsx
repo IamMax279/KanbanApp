@@ -12,6 +12,8 @@ import { AddKanbanService } from '@/services/addkanbanService';
 
 export default function WholeKanban() {
     const [checked, setChecked] = useState<boolean>(false)
+    const [isError, setIsError] = useState<boolean>(false)
+
     const {isOpen, onOpen, onOpenChange} = useDisclosure()
 
     const searchParams = useSearchParams()
@@ -28,7 +30,6 @@ export default function WholeKanban() {
 
     useEffect(() => {
         setChecked(status === "DONE")
-        console.log(id, description, title, status, deadline, label)
     }, [])
 
     const calculateDateDiffrence = () => {
@@ -53,7 +54,7 @@ export default function WholeKanban() {
                 router.replace('/')
             }
         } catch(error) {
-            console.log("error in delete", error)
+            setIsError(true)
         }
     }
 
@@ -64,7 +65,7 @@ export default function WholeKanban() {
                 router.replace("/")
             }
         } catch(error) {
-            console.log(error)
+            setIsError(true)
         }
     }
 
@@ -136,6 +137,26 @@ export default function WholeKanban() {
                                 </Button>
                                 <Button color="primary" onPress={() => handleDelete(id!)} className='font-semibold'>
                                 Yes
+                                </Button>
+                            </ModalFooter>
+                            </>
+                        )}
+                        </ModalContent>
+                    </Modal>
+                    <Modal isOpen={isError} onOpenChange={onOpenChange}>
+                        <ModalContent className='bg-neutral-900'>
+                        {(onClose) => (
+                            <>
+                            <ModalHeader className="flex flex-col gap-1 text-center text-gray-100">Deleting a Kanban</ModalHeader>
+                            <ModalBody>
+                                <p className='text-center text-gray-100'>
+                                    An error occured.
+                                </p>
+                            </ModalBody>
+                            <ModalFooter className='flex flex-row justify-center items-center gap-2'>
+                                <Button color="danger" variant="light" className='font-semibold'
+                                onPress={() => setIsError(false)}>
+                                OK
                                 </Button>
                             </ModalFooter>
                             </>

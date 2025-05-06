@@ -87,8 +87,6 @@ public class KanbanServiceImpl implements KanbanService {
                 .deadline(kanbanDto.getDeadline())
                 .status(kanbanDto.getStatus())
                 .label(kanbanDto.getLabel())
-                //.createdAt(kanbanDto.getCreatedAt())
-                //.updatedAt(kanbanDto.getUpdatedAt())
                 .build();
     }
 }

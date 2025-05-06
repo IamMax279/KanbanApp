@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -6,6 +7,8 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styles from "../../styles/login.module.css"
 import { SignupService } from "@/services/signupService"
 import Loading from "@/components/Loading";
+import { Button } from "@nextui-org/button";
+import { Modal, ModalContent, ModalHeader, ModalFooter } from "@nextui-org/modal";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("")
@@ -16,6 +19,7 @@ export default function SignUp() {
     const [uniqueViolation, setUniqueViolation] = useState<boolean>(false)
     const [emptyField, setEmptyField] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
+    const [success, setSuccess] = useState<boolean>(false)
 
     const router = useRouter()
 
@@ -36,8 +40,6 @@ export default function SignUp() {
                 password
             })
 
-            console.log(response)
-
             switch(response.errStatus) {
                 case 500:
                     setUniqueViolation(true)
@@ -48,11 +50,10 @@ export default function SignUp() {
             }
 
             if(response.success) {
-                console.log(response.data)
-                router.replace("/login")
+                setSuccess(true)
             }
         } catch(error) {
-            console.log("error in signup client", error)
+            setEmptyField(true)
         }
         finally {
             setLoading(false)
@@ -151,7 +152,7 @@ export default function SignUp() {
                 }
                 <div className={`flex justify-center items-center mt-5`}>
                     <p className={`${styles.loginP}`}>
-                        Already have an account? 
+                        Already have an account?
                         <Link href="/login">
                             <span className="text-zinc-300 brightness-90 hover:brightness-75 cursor-pointer">
                                 {' '} Sign in
@@ -160,6 +161,24 @@ export default function SignUp() {
                     </p>
                 </div>
             </form>
+            <Modal isOpen={success}>
+                <ModalContent className='bg-neutral-900'>
+                {(onClose) => (
+                    <>
+                    <ModalHeader className="flex flex-col gap-1 text-center text-gray-100">
+                        Signed up successfully.
+                    </ModalHeader>
+                    <ModalFooter className='flex flex-row justify-center items-center gap-2'>
+                        <Button color="primary" onPress={() => {
+                            router.replace('/')
+                        }} className='font-semibold'>
+                        OK
+                        </Button>
+                    </ModalFooter>
+                    </>
+                )}
+                </ModalContent>
+            </Modal>
         </div>
     )
 }

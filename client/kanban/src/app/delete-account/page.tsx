@@ -47,7 +47,6 @@ export default function DeleteAccount() {
                 setOpen(true)
             }
         } catch(error) {
-            console.log("kewf:", error)
             setError(true)
         } finally {
             setLoading(false)
@@ -72,10 +71,6 @@ export default function DeleteAccount() {
                             <label className={`${styles.loginLabel} font-semibold text-base`}>
                                 Password
                             </label>
-                            <span className={`${styles.loginLabel} font-semibold text-base
-                             text-zinc-300 brightness-90 cursor-pointer hover:brightness-75`}>
-                                Forgot password?
-                            </span>
                         </div>
                         <input type={`${secure ? 'password' : 'text'}`}
                         value={password}

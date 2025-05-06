@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-//Gdy kontroler (lub inny komponent) zgłasza potrzebę wstrzyknięcia zależności
-// typu UserService, Spring dostarcza implementację UserServiceImpl.
 @RestController
 public class UserController {
     @Autowired
