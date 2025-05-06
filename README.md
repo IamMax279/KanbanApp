@@ -23,4 +23,9 @@
 - Docker compose
 
 ## Disclaimer ##
-In order to run the app locally, You need to create the application.properties file, copy over the content of the application.properties.example file and implement some values it's missing. Afterwards, just build the app by running docker-compose up --build in the root directory.
+In order to run the app locally, You need to create the application.properties file, copy over the content of the application.properties.example file and implement the following:
+- jwt secret key (base 64)
+- psql username
+- psql password
+
+Afterwards, just build the app by running docker-compose up --build in the root directory.
