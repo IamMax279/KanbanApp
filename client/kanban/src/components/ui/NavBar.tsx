@@ -60,7 +60,7 @@ export default function NavBar({firstName}: NavBarProps) {
                     <div>
                         <Link href="/profile">
                             <h4 className="hover:brightness-75 hover:cursor-pointer self-center hidden md:block text-white">
-                                Witaj {firstName}
+                                Welcome {firstName}
                             </h4>
                         </Link>
                     </div>
