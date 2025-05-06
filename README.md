@@ -7,18 +7,18 @@
 ![image](https://github.com/user-attachments/assets/8d88c385-408d-40dd-a87a-c33c58c3ac21)
 
 ## Tech stack ##
-Backend
+### Backend ###
 - Java
 - Spring Boot
 - JWT
 - Postgres
 
-Frontend
+### Frontend ###
 - Nextjs (with api routes)
 - Tailwindcss
 - HeroUI
 
-DevOps
+### DevOps ###
 - Docker
 - Docker compose
 
