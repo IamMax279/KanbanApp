@@ -1,4 +1,4 @@
-### Kanban - For Planning And Scheduling Events ###
+# Kanban - For Planning And Scheduling Events #
 
 ![image](https://github.com/user-attachments/assets/22f49ce6-4f10-4658-b422-4c479d700bb4)
 
@@ -7,18 +7,18 @@
 ![image](https://github.com/user-attachments/assets/8d88c385-408d-40dd-a87a-c33c58c3ac21)
 
 ## Tech stack ##
-# Backend #
+Backend
 - Java
 - Spring Boot
 - JWT
 - Postgres
 
-# Frontend #
+Frontend
 - Nextjs (with api routes)
 - Tailwindcss
 - HeroUI
 
-# DevOps #
+DevOps
 - Docker
 - Docker compose
 
